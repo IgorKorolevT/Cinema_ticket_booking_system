@@ -1,5 +1,5 @@
 from src.booking import book_tickets, show_bookings, cancel_booking
-from src.movies import show_movies, add_movie, show_movie_info
+from src.movies import show_movies, add_movie, show_movie_info, search_movies
 
 
 def show_menu() -> None:
@@ -7,9 +7,10 @@ def show_menu() -> None:
     print("1. View movies")
     print("2. Add movie")
     print("3. Movie information")
-    print("4. Book tickets")
-    print("5. View bookings")
-    print("6. Cancel booking")
+    print("4. Search movies")
+    print("5. Book tickets")
+    print("6. View bookings")
+    print("7. Cancel booking")
     print("0. Exit")
 
 
@@ -49,6 +50,22 @@ def view_movie_info() -> None:
         return
 
     show_movie_info(movie_number)
+
+
+def search_movie() -> None:
+    print("\n=== Search Movies ===")
+    query = input("Enter movie title: ").strip()
+    if not query:
+        print("Search query cannot be empty.")
+        return
+    results = search_movies(query)
+    if not results:
+        print("No movies found.")
+        return
+    print("\nSearch results:")
+    for index, movie in enumerate(results, start=1):
+        print(f"{index}. {movie['title']} | " f"{movie['genre']} | " f"{movie['duration']} min")
+
 
 def create_booking() -> None:
     print("\n=== Book Tickets ===")
@@ -103,6 +120,7 @@ def cancel_ticket_booking() -> None:
 
     cancel_booking(booking_number)
 
+
 def main() -> None:
     while True:
         show_menu()
@@ -119,12 +137,15 @@ def main() -> None:
             view_movie_info()
 
         elif choice == "4":
-            create_booking()
+            search_movie()
 
         elif choice == "5":
-            view_bookings()
+            create_booking()
 
         elif choice == "6":
+            view_bookings()
+
+        elif choice == "7":
             cancel_ticket_booking()
 
         elif choice == "0":
