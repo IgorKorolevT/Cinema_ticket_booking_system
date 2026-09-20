@@ -1,5 +1,5 @@
 from src.booking import book_tickets, show_bookings, cancel_booking
-from src.movies import show_movies, add_movie, show_movie_info
+from src.movies import show_movies, add_movie, show_movie_info, show_favorites, add_to_favorites
 
 
 def show_menu() -> None:
@@ -8,8 +8,10 @@ def show_menu() -> None:
     print("2. Add movie")
     print("3. Movie information")
     print("4. Book tickets")
-    print("5. View bookings")
-    print("6. Cancel booking")
+    print("5. Add movie to favorites")
+    print("6. View favorites")
+    print("7. View bookings")
+    print("8. Cancel booking")
     print("0. Exit")
 
 
@@ -37,6 +39,24 @@ def create_movie() -> None:
     add_movie(title, genre, duration)
     print("Movie added successfully.")
 
+def add_movie_to_favorites() -> None:
+    print("\n=== Add to Favorites ===")
+    show_movies()
+    try:
+        movie_number = int(input("Enter movie number: "))
+    except ValueError:
+        print("Please enter a number.")
+        return
+    from movies import movies
+    if movie_number < 1 or movie_number > len(movies):
+        print("Movie not found.")
+        return
+    add_to_favorites(movies[movie_number - 1]["title"])
+    print("Movie added to favorites.")
+
+def view_favorites() -> None:
+    print("\n=== Favorite Movies ===")
+    show_favorites()
 
 def view_movie_info() -> None:
     print("\n=== Movie Information ===")
@@ -122,9 +142,15 @@ def main() -> None:
             create_booking()
 
         elif choice == "5":
-            view_bookings()
+            add_movie_to_favorites()
 
         elif choice == "6":
+            view_favorites()
+
+        elif choice == "7":
+            view_bookings()
+
+        elif choice == "8":
             cancel_ticket_booking()
 
         elif choice == "0":
