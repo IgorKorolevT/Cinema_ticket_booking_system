@@ -1,5 +1,5 @@
-from src.booking import book_tickets, show_bookings, cancel_booking
-from src.movies import show_movies, add_movie, show_movie_info, show_favorites, add_to_favorites
+from src.booking import book_tickets, show_bookings, cancel_booking, bookings
+from src.movies import show_movies, add_movie, show_movie_info, show_favorites, add_to_favorites, movies
 
 
 def show_menu() -> None:
@@ -12,6 +12,7 @@ def show_menu() -> None:
     print("6. View favorites")
     print("7. View bookings")
     print("8. Cancel booking")
+    print("9. Statistics")
     print("0. Exit")
 
 
@@ -39,6 +40,7 @@ def create_movie() -> None:
     add_movie(title, genre, duration)
     print("Movie added successfully.")
 
+
 def add_movie_to_favorites() -> None:
     print("\n=== Add to Favorites ===")
     show_movies()
@@ -54,9 +56,11 @@ def add_movie_to_favorites() -> None:
     add_to_favorites(movies[movie_number - 1]["title"])
     print("Movie added to favorites.")
 
+
 def view_favorites() -> None:
     print("\n=== Favorite Movies ===")
     show_favorites()
+
 
 def view_movie_info() -> None:
     print("\n=== Movie Information ===")
@@ -69,6 +73,7 @@ def view_movie_info() -> None:
         return
 
     show_movie_info(movie_number)
+
 
 def create_booking() -> None:
     print("\n=== Book Tickets ===")
@@ -123,6 +128,15 @@ def cancel_ticket_booking() -> None:
 
     cancel_booking(booking_number)
 
+
+def show_statistics() -> None:
+    print("\n=== Statistics ===")
+    available_movies = len(movies)
+    booked_tickets = sum(booking["quantity"] for booking in bookings)
+    print(f"Available movies: {available_movies}")
+    print(f"Booked tickets: {booked_tickets}")
+
+
 def main() -> None:
     while True:
         show_menu()
@@ -152,6 +166,8 @@ def main() -> None:
 
         elif choice == "8":
             cancel_ticket_booking()
+        elif choice == "9":
+            show_statistics()
 
         elif choice == "0":
             print("Goodbye!")
