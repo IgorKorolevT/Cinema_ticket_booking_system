@@ -11,6 +11,8 @@ movies = [
     },
 ]
 
+favorites = []
+
 
 def add_movie(title: str, genre: str, duration: int) -> None:
     movies.append(
@@ -45,3 +47,17 @@ def show_movie_info(index: int) -> None:
     print(f"Title: {movie['title']}")
     print(f"Genre: {movie['genre']}")
     print(f"Duration: {movie['duration']} min")
+
+
+def add_to_favorites(movie_title: str) -> None:
+    if movie_title not in favorites:
+        favorites.append(movie_title)
+
+
+def show_favorites() -> None:
+    if not favorites:
+        print("No favorite movies.")
+        return
+
+    for movie in favorites:
+        print(movie)
