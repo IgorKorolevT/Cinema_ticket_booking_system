@@ -26,6 +26,7 @@ def show_bookings() -> None:
 
 
 def cancel_booking(index: int) -> None:
+    """Cansel booking"""
     if index < 1 or index > len(bookings):
         print("Booking not found.")
         return
