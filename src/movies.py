@@ -61,3 +61,12 @@ def show_favorites() -> None:
 
     for movie in favorites:
         print(movie)
+        
+def search_movies(query: str) -> list[dict]:
+    query = query.lower()
+
+    return [
+        movie
+        for movie in movies
+        if query in movie["title"].lower()
+    ]
