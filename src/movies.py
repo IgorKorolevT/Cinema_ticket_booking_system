@@ -70,3 +70,6 @@ def search_movies(query: str) -> list[dict]:
         for movie in movies
         if query in movie["title"].lower()
     ]
+
+def calculate_discount(price: float, discount: float) -> float:
+    return price * (1 - discount / 100)
