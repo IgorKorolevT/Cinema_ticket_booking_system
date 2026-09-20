@@ -45,3 +45,13 @@ def show_movie_info(index: int) -> None:
     print(f"Title: {movie['title']}")
     print(f"Genre: {movie['genre']}")
     print(f"Duration: {movie['duration']} min")
+
+
+def search_movies(query: str) -> list[dict]:
+    query = query.lower()
+
+    return [
+        movie
+        for movie in movies
+        if query in movie["title"].lower()
+    ]
