@@ -1,3 +1,5 @@
+from src.movies import movies
+
 bookings = []
 
 
@@ -34,3 +36,7 @@ def cancel_booking(index: int) -> None:
     bookings.pop(index - 1)
 
     print("Booking cancelled.")
+
+def show_statistics() -> None:
+    print(f"Available movies: {len(movies)}")
+    print(f"Booked tickets: {sum(item['quantity'] for item in bookings)}")
